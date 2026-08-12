@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using AI in the Design Process — Martina Gama</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23FBFBFB%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Snell%20Roundhand%2C%20Bradley%20Hand%2C%20cursive%2C%20serif%27%20font-size%3D%2728%27%20font-weight%3D%27700%27%20fill%3D%27%231a1a2e%27%20text-anchor%3D%27middle%27%3EMG%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b6b7b;
+      --navy: #1a1a5e;
+      --navy-mid: #2d2d7a;
+      --border: rgba(0,0,0,0.09);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 5vw;
+      background: rgba(251,251,251,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: var(--font-hand);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      background: var(--bg-white);
+      border-radius: 20px;
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+
+    /* ARTICLE */
+    .article-wrap {
+      width: 100%;
+      padding: 9rem 5vw 0;
+    }
+    .article-body-wrap {
+      width: 100%;
+      padding: 0 5vw 2rem;
+    }
+    .article-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 5vw, 54px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      max-width: 900px;
+      margin-bottom: 1.25rem;
+    }
+    .article-subtitle {
+      font-family: var(--font-sans);
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+    .article-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      margin: 3rem 0;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+    }
+
+    .article-body { width: 100%; }
+    .article-body p {
+      font-size: 19px;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+    .article-body h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.3;
+      margin: 3rem 0 1.25rem;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--navy);
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .article-body strong { color: var(--navy); font-weight: 600; }
+
+    footer {
+      padding: 2rem 5vw 3rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 11px; color: var(--muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .article-wrap { padding: 7rem 6vw 0; }
+      .article-body-wrap { padding: 0 6vw 1rem; }
+      .article-cover-placeholder { margin: 2.25rem 0; }
+      .article-body blockquote { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">MG</a>
+    <a href="portfolio.html#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+    <p class="article-tag">Process</p>
+    <h1 class="article-title">Using AI in the Design Process</h1>
+    <p class="article-subtitle">How generative tools have started showing up in my day-to-day work — and where I still draw the line.</p>
+  </div>
+
+  <div class="article-cover-placeholder">
+    <img src="coverblogai.jpg" alt="Using AI in the Design Process" style="width:100%;height:100%;object-fit:cover;object-position:center 65%;display:block;" />
+  </div>
+
+  <div class="article-body-wrap">
+    <div class="article-body">
+      <p>Over the past year, AI tools quietly moved from something I opened out of curiosity to something I open every day. Not because I decided to "adopt AI" as a strategy, but because a few tools kept saving me time on the parts of the process that used to eat the most hours — and I kept coming back.</p>
+
+      <h2>Research and synthesis</h2>
+      <p>Interview transcripts pile up fast, and reading through every one of them line by line is where a lot of research time disappears. I now use AI to get a first pass — summarizing sessions, flagging repeated phrases, grouping quotes into rough themes — before I sit down and build the affinity map myself. It's a first draft of a first draft, never the final read. The clustering it suggests is often close, but "close" is exactly where a human still needs to double-check.</p>
+
+      <h2>Exploring the space faster</h2>
+      <p>Before committing to Figma, I've started using AI to generate quick moodboards and divergent layout ideas — a way to see five directions in the time it used to take to sketch one. It doesn't replace sketching, but it changes what sketching is for: instead of generating options, I use it to react to options and decide which one is actually worth building.</p>
+
+      <blockquote>AI is fastest at giving me more options. It is still terrible at telling me which one is right.</blockquote>
+
+      <h2>Where I still say no</h2>
+      <p>Final copy, the specific feel of a transition, the judgment call on whether an interaction is actually delightful or just technically correct — that stays with me. AI drafts are a starting point, never the shipped version. The moment a decision is about taste or trust, I've learned to slow back down.</p>
+
+      <p>I don't think the goal is to use AI in every step of the process. It's to notice which steps were never really about your judgment in the first place, and let those go a little faster — so there's more time left for the ones that were.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Martina Gama — 2026</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martina Gama — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b6b7b;
+      --navy: #1a1a5e;
+      --navy-mid: #2d2d7a;
+      --border: rgba(0,0,0,0.1);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(251,251,251,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: var(--font-hand);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 0.5; }
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      background: var(--bg-white);
+      border: none;
+      border-radius: 20px;
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,0.15); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    /* Central card — liquid glass, no color tint */
+    .hero-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 0.5px solid rgba(255,255,255,0.6);
+      border-radius: 24px;
+      padding: 2.5rem 3.5rem;
+      text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6);
+      min-width: 300px;
+    }
+    .hero-card h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
+    }
+    .hero-card-sub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+      font-size: 24px;
+      color: var(--muted);
+    }
+    .hero-card-sub img { width: 18px; height: 18px; object-fit: contain; }
+
+    /* Floating elements */
+    .float {
+      position: absolute;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      will-change: transform;
+      cursor: default;
+      user-select: none;
+    }
+
+    /* Polaroids */
+    .polaroid {
+    
+    }
+    .polaroid img {
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Sticker images (no frame) */
+    .sticker img {
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+    }
+
+    /* Handwritten doodle text */
+    .doodle {
+      font-family: var(--font-hand);
+      color: var(--navy-mid);
+      pointer-events: none;
+    }
+
+    /* ── FLOATING ELEMENT POSITIONS — faithful to Figma ── */
+
+   
+
+    /* Folder small — below museum */
+    .el-folder-sm {
+      top: 28%;
+      left: 24%;
+      transform: rotate(0deg);
+    }
+    .el-folder-sm img { width: 88px; height: 76px; display: block; }
+
+    /* Pitch polaroid — top right, landscape */
+    .el-pitch {
+      top: 18%;
+      right: 16%;
+      transform: rotate(2deg);
+    }
+    .el-pitch img { width: 220px; height: 136px; display: block; }
+
+    /* Hello sticker — bottom left */
+    .el-hello {
+      bottom: 28%;
+      left: 10%;
+      transform: rotate(-4deg);
+    }
+    .el-hello img { width: 200px; display: block; }
+
+
+
+    /* Macintosh — bottom center below card */
+    .el-mac {
+      bottom: 25%;
+      left: 30%;
+      transform: rotate(0deg);
+      pointer-events: none;
+    }
+    .el-mac img { width: 60px; display: block; }
+
+  
+
+    /* Folder large — bottom right below portrait */
+    .el-folder-lg {
+      bottom: 10%;
+      right: 21%;
+      transform: rotate(0deg);
+    }
+    .el-folder-lg img { width: 150px; height: 76px; display: block; }
+
+    /* Book cover — top center */
+    .el-book {
+      top: 20%;
+      left: 65%;
+      transform: rotate(-4deg);
+      z-index: 3;
+    }
+    .el-book img {
+      width: 56px;
+      height: auto;
+      display: block;
+      border-radius: 3px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+    }
+
+    /* Swift sticker — top left above app polaroid */
+    .el-swift {
+      top: 36%;
+      left: 16%;
+      transform: rotate(6deg);
+      z-index: 4;
+    }
+    .el-swift img { width: 50px; display: block; }
+
+    /* Figma sticker — right side middle */
+    .el-figma {
+      top: 50%;
+      right: 20%;
+      transform: rotate(-8deg);
+    }
+    .el-figma img { width: 88px; display: block; }
+
+    /* "nice to meet you" handwritten — flows below hero-card */
+    .el-nicetomeet {
+      font-size: 32px;
+      align-self: flex-end;
+      margin-top: 8px;
+      transform: rotate(-3deg);
+      transform-origin: right center;
+    }
+
+    /* Book cover — right side, between Figma sticker and portrait */
+    .el-bookcover {
+      top: 70%;
+      right: 22%;
+      transform: rotate(-7deg);
+    }
+    .el-bookcover img {
+      width: 70px;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+    }
+
+    /* New photos — polaroid-style frame (white padding, generated in CSS) */
+    .polaroid-new {
+      background: #fff;
+      padding: 8px 8px 24px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+      border-radius: 2px;
+    }
+    .polaroid-new img { display: block; height: auto; }
+
+    /* Design Museum photo — far left, between Swift sticker and Hello sticker */
+    .el-designmuseum {
+      top: 57%;
+      left: 19%;
+      transform: rotate(-6deg);
+    }
+    .el-designmuseum img { width: 88px; }
+
+    /* Design wall photo — top area, above the card */
+    .el-designwall {
+      top: 14%;
+      left: 37%;
+      transform: rotate(3deg);
+    }
+    .el-designwall img { width: 140px; }
+
+    /* Vision Pro photo — far bottom right corner */
+    .el-visionpro {
+      bottom: 62%;
+      right: 75%;
+      transform: rotate(-4deg);
+    }
+    .el-visionpro img { width: 112px; }
+
+    /* ── APP STORE CAROUSEL ── */
+    .appstore-wrap {
+      width: 100%;
+      padding: 6rem 5vw 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      /* clip icons that bleed past the right margin */
+      overflow: hidden;
+    }
+    .appstore-left h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .appstore-left p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .appstore-right {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      /* fade out both edges so icons disappear cleanly */
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 80%, transparent 100%);
+    }
+    .appstore-track {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+      animation: scrollApps 16s linear infinite;
+      padding: 0.5rem 0;
+    }
+    .appstore-track:hover { animation-play-state: paused; }
+    @keyframes scrollApps {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .app-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+    }
+    .app-icon-item img {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .app-icon-item:hover img {
+      transform: scale(1.08);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+    }
+    .app-icon-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .appstore-wrap { grid-template-columns: 1fr; align-items: flex-start; gap: 2rem; }
+      .appstore-right { width: 100%; max-width: 100%; }
+    }
+
+    /* ── PROJECT CARDS CAROUSEL ── */
+    .proj-carousel-section {
+      width: 100%;
+      padding: 5rem 0 5rem 5vw;
+      overflow: hidden;
+    }
+    .proj-carousel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-right: 5vw;
+      margin-bottom: 2.5rem;
+    }
+    .proj-carousel-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .proj-carousel-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .proj-carousel-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 0.5px solid var(--border);
+      background: var(--bg-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--navy);
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+    .proj-carousel-btn:hover { background: var(--navy); color: #fff; transform: scale(1.08); }
+    .proj-carousel-track {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 1rem;
+      /* show partial 4th card by not having right padding */
+      padding-right: 0;
+    }
+    .proj-carousel-track::-webkit-scrollbar { display: none; }
+    .proj-card {
+      flex-shrink: 0;
+      width: calc((100vw - 10vw - 2.5rem) / 3);
+      min-width: 280px;
+      height: 440px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .proj-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .proj-card:hover .proj-card-bg { transform: scale(1.05); }
+    /* dark gradient at bottom */
+    .proj-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,30,0.72) 0%, rgba(10,10,30,0.1) 55%, transparent 100%);
+      border-radius: 24px;
+    }
+    .proj-card-info {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      z-index: 2;
+      background: rgba(255,255,255,0.13);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(255,255,255,0.25);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      transform: translateY(6px);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .proj-card:hover .proj-card-info { transform: translateY(0); }
+    .proj-card-type {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 3px 10px;
+      margin-bottom: 0.5rem;
+    }
+    .proj-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .proj-card-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── PAGE SECTIONS ── */
+    .section-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .divider { border: none; border-top: 0.5px solid var(--border); }
+
+    /* CONNECTION */
+    .connection-wrap {
+      width: 100%;
+      padding: 6rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .connection-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+    }
+    .connection-right p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .connection-right p:last-child { margin-bottom: 0; }
+
+    /* QUOTE */
+    .quote-wrap {
+      width: 100%;
+      padding: 2.5rem 5vw;
+      text-align: center;
+    }
+    .quote-wrap blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.4;
+      max-width: 820px;
+      margin: 0 auto 1.5rem;
+    }
+    .quote-attr {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* PROJECTS */
+    .projects-wrap {
+      width: 100%;
+      padding: 5rem 5vw 6rem;
+    }
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3rem;
+    }
+    .projects-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .project-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(26,26,94,0.09);
+    }
+    .project-card-cover {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+    }
+    .project-card-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-card-cover-placeholder img { width: 72px; height: 72px; border-radius: 18px; }
+    .project-card-body { padding: 1.75rem; }
+    .project-meta {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .project-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    .project-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .ptag {
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.06);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+    @media (max-width: 720px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    /* EXPERIENCE */
+    .experience-wrap {
+      width: 100%;
+      padding: 5rem 5vw 6rem;
+    }
+    .experience-header { margin-bottom: 1rem; }
+    .experience-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .experience-item {
+      padding: 1.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1.5rem;
+    }
+    .experience-item:first-of-type { border-top: 0.5px solid var(--border); }
+    .exp-period {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .exp-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+    .exp-role {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0;
+    }
+    .exp-company { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif; font-size: 16px; color: var(--navy-mid); font-weight: 500; margin-bottom: 0; }
+    .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: none; }
+
+    /* ABOUT */
+    .about-wrap {
+      width: 100%;
+      padding: 5rem 5vw 6rem;
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      object-position: center 25%;
+      border-radius: 18px;
+    }
+    .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+    .about-right h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .about-right p:not(.section-tag) { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif; font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 0.75rem; }
+    .about-details { display: flex; flex-direction: column; gap: 1.1rem; }
+    .detail-key {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .detail-val { font-size: 14px; font-weight: 500; color: var(--navy); }
+
+    /* BEYOND THE PORTFOLIO */
+    .beyond-wrap {
+      width: 100%;
+      padding: 5rem 5vw 6rem;
+    }
+    .beyond-wrap h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+    .beyond-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+    }
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .beyond-card {
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .beyond-card-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+      margin-bottom: 1rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .beyond-card:hover .beyond-card-cover-placeholder {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(26,26,94,0.1);
+    }
+    .beyond-card-caption {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      width: 100%;
+      padding: 5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+    .contact-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .contact-left p { font-size: 14px; color: var(--muted); }
+    .contact-btns { display: flex; gap: 12px; flex-shrink: 0; }
+    .btn {
+      font-size: 13px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      padding: 12px 26px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-block;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(26,26,94,0.22);
+      color: var(--navy);
+      background: transparent;
+    }
+    .btn-fill {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 18px rgba(26,26,94,0.22);
+    }
+
+    /* FOOTER */
+    footer {
+      width: 100%;
+      padding: 2rem 5vw 3rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 11px; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--navy); }
+
+    /* ── PROJECT VIEW ── */
+    #portfolio-view { display: block; }
+    #project-view { display: none; }
+
+    .nav-back {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-sans);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--navy); }
+
+    .project-hero {
+      padding: 8rem 5vw 4rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .project-type {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .project-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.05;
+      margin-bottom: 2.5rem;
+    }
+    .project-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 3rem;
+      justify-content: start;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .meta-key {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .meta-val { font-size: 14px; font-weight: 500; color: var(--navy); line-height: 1.5; }
+    .meta-val.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mtag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.07);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    .project-cover-wrap {
+      width: 100%;
+      aspect-ratio: 16/8;
+      background: linear-gradient(135deg, #e8e6e0 0%, #d4d0c8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 20px;
+      color: var(--muted);
+      overflow: hidden;
+    }
+    .project-cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .psec {
+      padding: 5rem 5vw;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .psec-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .psec-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 6px;
+      position: sticky;
+      top: 5rem;
+    }
+    .psec-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .psec-content p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
+    .psec-content p:last-child { margin-bottom: 0; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(26,26,94,0.07); }
+    .feature-num { font-family: var(--font-hand); font-size: 26px; color: var(--navy); opacity: 0.18; margin-bottom: 0.75rem; }
+    .feature-card h3 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; max-width: none; }
+
+    .process-steps { display: flex; flex-direction: column; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .process-step:first-child { border-top: 0.5px solid var(--border); }
+    .step-num { font-family: var(--font-hand); font-size: 20px; color: var(--navy); opacity: 0.25; padding-top: 2px; }
+    .step-body h3 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .step-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; max-width: none; }
+    .step-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .steptag { font-size: 10px; padding: 3px 10px; border-radius: 20px; background: rgba(26,26,94,0.06); color: var(--navy-mid); font-weight: 500; }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .result-ph {
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--muted);
+      aspect-ratio: 9/16;
+    }
+    .result-ph.wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .result-grid img { width: 100%; border-radius: 14px; object-fit: cover; display: block; }
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 12px 24px;
+      border: 1px solid rgba(26,26,94,0.22);
+      border-radius: 40px;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+    .demo-link:hover { transform: translateY(-2px); background: var(--navy); color: #fff; }
+
+    .other-projects-wrap { padding: 5rem 5vw 6rem; }
+    .other-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2.5rem; }
+    .other-header h2 { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 32px); font-weight: 400; color: var(--navy); }
+    .other-header button { font-size: 12px; color: var(--muted); background: none; border: none; font-family: var(--font-sans); cursor: pointer; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+    .other-header button:hover { color: var(--navy); }
+    .other-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .other-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      display: block;
+    }
+    .other-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(26,26,94,0.09); }
+    .other-card-cover {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 18px;
+      color: var(--muted);
+      overflow: hidden;
+    }
+    .other-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .other-card-body { padding: 1.5rem; }
+    .other-card-meta { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .other-card-title { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--navy); margin-bottom: 5px; }
+    .other-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .other-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+    .otag { font-size: 10px; padding: 3px 9px; border-radius: 20px; background: rgba(26,26,94,0.06); color: var(--navy-mid); font-weight: 500; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5vw; }
+      nav .nav-links { display: none; }
+
+      .hero-card { padding: 1.75rem 2rem; min-width: unset; width: 70vw; }
+
+      /* esconde elementos maiores/secundários e reorganiza os que sobram na hero em mobile */
+      .el-pitch, .el-folder-sm, .el-hello, .el-nicetomeet, .el-bookcover, .el-book, .el-designwall, .el-folder-lg { display: none; }
+
+      .el-swift { top: 9%; left: 8%; }
+      .el-swift img { width: 46px; }
+
+      .el-figma { top: 9%; right: 8%; }
+      .el-figma img { width: 64px; }
+
+      .el-designmuseum { bottom: 15%; left: 5%; top: auto; }
+      .el-designmuseum img { width: 84px; }
+
+      .el-visionpro { bottom: 15%; right: 5%; top: auto; }
+      .el-visionpro img { width: 84px; }
+
+      .el-mac { left: 50%; bottom: 3%; transform: translateX(-50%); }
+      .el-mac img { width: 56px; }
+
+      .connection-wrap { grid-template-columns: 1fr; padding: 4rem 5vw; gap: 2rem; }
+      .quote-wrap { padding: 2rem 5vw; }
+      .projects-wrap { padding: 4rem 5vw; }
+      .experience-wrap { padding: 4rem 5vw; }
+      .experience-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .about-wrap { grid-template-columns: 1fr; padding: 4rem 5vw; gap: 2rem; }
+      .about-photo { aspect-ratio: 1/1; max-width: 300px; margin: 0 auto; }
+      .beyond-wrap { padding: 4rem 5vw; }
+      .beyond-grid { grid-template-columns: 1fr; }
+      .contact-wrap { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { padding: 1.5rem 5vw 2.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-card { width: 82vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo" id="nav-logo">MG</a>
+    <button class="nav-back" id="nav-back" onclick="showPortfolio()">← Back to projects</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <div id="portfolio-view">
+  <!-- HERO -->
+  <div class="hero" id="hero">
+
+    <!-- Book cover — top center -->
+    <div class="float el-book">
+      <img src="creativeconfidencebook.jpg" alt="Creative Confidence — Tom Kelley & David Kelley" />
+    </div>
+
+    <!-- Swift sticker — top left -->
+    <div class="float sticker el-swift">
+      <img src="swiftsticker.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Figma sticker — right middle -->
+    <div class="float sticker el-figma">
+      <img src="figmasticker.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Book cover — right side, below Figma sticker -->
+    <div class="float el-bookcover">
+      <img src="creativeactbook.jpg" alt="The Creative Act: A Way of Being — Rick Rubin" />
+    </div>
+
+    <!-- Design Museum photo — far left middle -->
+    <div class="float polaroid-new el-designmuseum">
+      <img src="photodesignmuseum.jpg" alt="Martina no Design Museum" />
+    </div>
+
+    <!-- Design wall photo — top, above the card -->
+    <div class="float polaroid-new el-designwall">
+      <img src="photodesignwall.jpg" alt="Painel de objetos de design" />
+    </div>
+
+    <!-- Vision Pro photo — bottom right corner -->
+    <div class="float polaroid-new el-visionpro">
+      <img src="photovisionpro.jpg" alt="Martina testando o Apple Vision Pro" />
+    </div>
+
+    <!-- Folder small -->
+    <div class="float sticker el-folder-sm">
+      <img src="foldersticker.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Pitch polaroid — top right, landscape -->
+    <div class="float polaroid el-pitch">
+      <img src="photopitch.png" alt="Martina no evento" />
+    </div>
+
+    <!-- Hello sticker — top right -->
+    <div class="float sticker el-hello">
+      <img src="hellosticker.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Macintosh — bottom center -->
+    <div class="float sticker el-mac">
+      <img src="macintosh.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Folder large — bottom right -->
+    <div class="float sticker el-folder-lg">
+      <img src="foldersticker.png" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Central card + nice to meet you -->
+    <div style="display:flex; flex-direction:column; position:relative; z-index:10;">
+      <div class="hero-card">
+        <h1>Martina Gama</h1>
+        <div class="hero-card-sub">
+          
+          Product Designer
+        </div>
+      </div>
+      <div class="doodle el-nicetomeet">nice to meet you</div>
+    </div>
+
+  </div>
+
+  <!-- APP STORE CAROUSEL -->
+  <div class="appstore-wrap">
+    <div class="appstore-left">
+      <h3>Apps designed by me<br>on the App Store</h3>
+      <p>Download now</p>
+    </div>
+    <div class="appstore-right">
+      <div class="appstore-track">
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/avo-tracker/id6746510080" target="_blank">
+          <img src="iconavo.png" alt="AvoTracker" />
+          <span class="app-icon-name">AvoTracker</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/nikki-journal/id6756323938" target="_blank">
+          <img src="iconnikki.png" alt="Nikki Journal" />
+          <span class="app-icon-name">Nikki Journal</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/profitto/id6752310169" target="_blank">
+          <img src="IconProfitto.png" alt="Profitto" />
+          <span class="app-icon-name">Profitto</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/sardine-escape/id6760598758" target="_blank">
+          <img src="iconsardinescape.jpg" alt="Sardine Scape" />
+          <span class="app-icon-name">Sardine Scape</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/product-sessions/id6795209380?mt=12" target="_blank">
+          <img src="iconproductsession.svg" alt="Product Sessions" />
+          <span class="app-icon-name">Product Sessions</span>
+        </a>
+        <!-- duplicate for seamless loop -->
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/avo-tracker/id6746510080" target="_blank">
+          <img src="iconavo.png" alt="AvoTracker" />
+          <span class="app-icon-name">AvoTracker</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/nikki-journal/id6756323938" target="_blank">
+          <img src="iconnikki.png" alt="Nikki Journal" />
+          <span class="app-icon-name">Nikki Journal</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/profitto/id6752310169" target="_blank">
+          <img src="IconProfitto.png" alt="Profitto" />
+          <span class="app-icon-name">Profitto</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/sardine-escape/id6760598758" target="_blank">
+          <img src="iconsardinescape.jpg" alt="Sardine Scape" />
+          <span class="app-icon-name">Sardine Scape</span>
+        </a>
+        <a class="app-icon-item" href="https://apps.apple.com/br/app/product-sessions/id6795209380?mt=12" target="_blank">
+          <img src="iconproductsession.svg" alt="Product Sessions" />
+          <span class="app-icon-name">Product Sessions</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED PROJECTS -->
+  <div class="projects-wrap" id="projects">
+    <div class="projects-header">
+      <h2>Featured projects</h2>
+      <p class="section-tag">/ work</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <a class="project-card" href="project.html">
+        <img class="project-card-cover" src="coveravoportfolio.png" alt="Avo Tracker preview" />
+        <div class="project-card-body">
+          <p class="project-meta">iOS App &nbsp;·&nbsp; 2025</p>
+          <h3 class="project-name">Avo Tracker</h3>
+          <p class="project-desc">Developed to help people identify potential food allergies and intolerances by logging meals and symptoms. The app analyzes patterns between foods consumed and symptoms, organizes the history, and assists in tracking dietary health.</p>
+          <div class="project-tags">
+            <span class="ptag">Swift</span>
+            <span class="ptag">SwiftUI</span>
+            <span class="ptag">Product Design</span>
+            <span class="ptag">App Store</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="nikki.html">
+        <img class="project-card-cover" src="covernikkiportfolio.png" alt="Nikki Journal preview" />
+        <div class="project-card-body">
+          <p class="project-meta">iOS App · 3D Experience &nbsp;·&nbsp; 2026</p>
+          <h3 class="project-name">Nikki Journal</h3>
+          <p class="project-desc">A mobile journaling app that transforms memories into collectible origami inside an interactive 3D world inspired by Japanese landscapes. Users create expressive journal pages with text, photos, music, drawings, and stickers, blending emotional design with spatial experiences.</p>
+          <div class="project-tags">
+            <span class="ptag">Swift</span>
+            <span class="ptag">Reality Composer</span>
+            <span class="ptag">Product Design</span>
+            <span class="ptag">Spatial Design</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Profitto temporarily hidden — keep structure for later re-enable
+      <a class="project-card" href="profitto.html">
+        <img class="project-card-cover" src="coverprofittoportfolio.png" alt="Profitto preview" />
+        <div class="project-card-body">
+          <p class="project-meta">iOS App · FinTech &nbsp;·&nbsp; 2025</p>
+          <h3 class="project-name">Profitto</h3>
+          <p class="project-desc">A business management app designed for small entrepreneurs. It centralizes product catalogs, inventory, purchases, and sales in one place, with automatic stock updates and low-stock alerts, making daily operations simpler, faster, and more organized.</p>
+          <div class="project-tags">
+            <span class="ptag">Swift</span>
+            <span class="ptag">Product Design</span>
+            <span class="ptag">FinTech</span>
+            <span class="ptag">Design System</span>
+          </div>
+        </div>
+      </a>
+      -->
+
+      <a class="project-card" href="elasnomei.html">
+        <img class="project-card-cover" src="coverelasnomeiportfolio.png" alt="Elas no MEI preview" />
+        <div class="project-card-body">
+          <p class="project-meta">Mobile App · Educational &nbsp;·&nbsp; 2025</p>
+          <h3 class="project-name">Elas no MEI</h3>
+          <p class="project-desc">An educational app that transforms the MEI formalization process into an intuitive, supportive, and human-centered journey built specifically for women.</p>
+          <div class="project-tags">
+            <span class="ptag">UX/UI Design</span>
+            <span class="ptag">Inclusive Design</span>
+            <span class="ptag">Educational</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="productsessions.html">
+        <img class="project-card-cover" src="coverproductsessions.png" alt="Product Sessions preview" />
+        <div class="project-card-body">
+          <p class="project-meta">macOS App · Productivity &nbsp;·&nbsp; 2026</p>
+          <h3 class="project-name">Product Sessions</h3>
+          <p class="project-desc">An AI-powered tool for analyzing usability test recordings. It automatically transcribes sessions, identifies patterns in user behavior, and generates structured UX reports with evidence-backed findings — all processed locally on the Mac for privacy.</p>
+          <div class="project-tags">
+            <span class="ptag">AI</span>
+            <span class="ptag">UX Research</span>
+            <span class="ptag">Product Design</span>
+            <span class="ptag">macOS</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-wrap">
+    <blockquote>"Design is where strategy<br>and empathy meet."</blockquote>
+    <p class="quote-attr">— Debbie Millman</p>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="experience-wrap" id="experience">
+    <div class="experience-header">
+      <p class="section-tag">/ experience</p>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="experience-item">
+      <span class="exp-period">2025 — Now</span>
+      <div>
+        <div class="exp-header">
+          <h3 class="exp-role">Product Designer</h3>
+          <p class="exp-company">Apple Developer Academy</p>
+        </div>
+        <p class="exp-desc">•Two-year multidisciplinary Apple program focused on digital product design, development, and innovation; <br>•Delivered production-ready UI for Apple platform products, building structured, component-based Figma files and refining designs through to polished final states; <br>•Designed accessible interfaces integrated with Apple accessibility features , VoiceOver, Voice Control, and Dynamic Type and applied WCAG contrast checks for inclusive, standards-compliant experiences; <br>•Worked in agile Scrum teams as Product Owner and Scrum Master; collaborated directly with development, prototyping in Swift/SwiftUI and reviewing implemented builds against designs to close gaps.</p>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <span class="exp-period">jan 2024 — jan 2025</span>
+      <div>
+        <div class="exp-header">
+          <h3 class="exp-role">Product Designer</h3>
+          <p class="exp-company">Preto no Branco</p>
+        </div>
+        <p class="exp-desc">•Led end-to-end digital product design, from problem definition to final UI delivery and development handoff, with multidisciplinary teams;
+<br>•Produced polished, consistent interfaces with well-structured components, applying and reinforcing design system standards across touchpoints;
+<br>•Delivered digital solutions for clients from early-stage entrepreneurs to large organisations such as Honda and VMI Security.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-wrap" id="about">
+    <img class="about-photo" src="photo.jpg" alt="Martina Gama" />
+    <div class="about-right">
+      <div>
+        <p class="section-tag">/ about me</p>
+        <h2>Martina Gama</h2>
+        <p>Product Designer with 4 years of experience creating digital experiences that connect user needs, business goals and product strategy. I work closely with stakeholders, clients and engineers, contributing to product decisions and translating complex challenges into intuitive and effective solutions.</p>
+        <p>I enjoy collaborating with multidisciplinary teams to design experiences that are both valuable for users and impactful for businesses.</p>
+      </div>
+      <div class="about-details">
+        <div>
+          <span class="detail-key">location</span>
+          <span class="detail-val">Brasil</span>
+        </div>
+        <div>
+          <span class="detail-key">education</span>
+          <span class="detail-val">Design de Comunicação — PUCRS, 2025</span>
+        </div>
+        <div>
+          <span class="detail-key">currently</span>
+          <span class="detail-val">Apple Developer Academy Porto Alegre</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEYOND THE PORTFOLIO -->
+  <div class="beyond-wrap" id="blog">
+    <h2>Beyond the Portfolio</h2>
+    <span class="beyond-badge">What I've been learning</span>
+    <div class="beyond-grid">
+      <a class="beyond-card" href="blog-ai-in-design.html">
+        <div class="beyond-card-cover-placeholder">
+          <img src="coverblogai.jpg" alt="Using AI in the Design Process" style="width:100%;height:100%;object-fit:cover;object-position:center 65%;display:block;border-radius:16px;" />
+        </div>
+        <p class="beyond-card-caption">Using AI in the design process</p>
+      </a>
+      <a class="beyond-card" href="blog-designing-for-visionos.html">
+        <div class="beyond-card-cover-placeholder">
+          <img src="covervisionos.jpg" alt="Designing for visionOS" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;border-radius:16px;" />
+        </div>
+        <p class="beyond-card-caption">Designing for visionOS</p>
+      </a>
+      <a class="beyond-card" href="blog-usability-testing.html">
+        <div class="beyond-card-cover-placeholder">
+          <img src="coverusability.png" alt="Usability testing" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;" />
+        </div>
+        <p class="beyond-card-caption">Usability testing</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-wrap" id="contact">
+    <div class="contact-left">
+      <p class="section-tag">/ contact</p>
+      <h2>Let's work together.</h2>
+      <p>Open to projects, collaborations and new opportunities.</p>
+    </div>
+    <div class="contact-btns">
+      <a class="btn btn-outline" href="https://linkedin.com/in/SEU-LINKEDIN" target="_blank">LinkedIn</a>
+      <a class="btn btn-fill" href="mailto:SEU-EMAIL@gmail.com">Send an email</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Martina Gama — 2026</p>
+  </footer>
+
+  <script>
+    // ── Hero parallax ──
+    const hero = document.getElementById('hero');
+    const floats = document.querySelectorAll('.float');
+
+    const bases = [];
+    floats.forEach(el => {
+      const m = new DOMMatrix(window.getComputedStyle(el).transform);
+      const angle = Math.round(Math.atan2(m.b, m.a) * 180 / Math.PI);
+      const depth = +(Math.random() * 0.55 + 0.2).toFixed(2);
+      bases.push({ el, angle, depth, hovered: false });
+    });
+
+    hero.addEventListener('mousemove', e => {
+      const rect = hero.getBoundingClientRect();
+      const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      bases.forEach(item => {
+        if (item.hovered) return;
+        const tx = dx * 20 * item.depth;
+        const ty = dy * 13 * item.depth;
+        item.el.style.transition = 'transform 0.6s ease-out';
+        item.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${item.angle}deg)`;
+        item.tx = tx;
+        item.ty = ty;
+      });
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      bases.forEach(item => {
+        if (item.hovered) return;
+        item.el.style.transition = 'transform 0.8s ease-out';
+        item.el.style.transform = `rotate(${item.angle}deg)`;
+        item.tx = 0;
+        item.ty = 0;
+      });
+    });
+
+    floats.forEach((el, i) => {
+      const item = bases[i];
+      el.addEventListener('mouseenter', () => {
+        item.hovered = true;
+        const tx = item.tx || 0;
+        const ty = item.ty || 0;
+        el.style.transition = 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s, filter 0.35s';
+        el.style.transform = `translate(${tx}px, ${ty}px) rotate(${item.angle * 0.3}deg) scale(1.12)`;
+        el.style.zIndex = 20;
+        el.style.filter = 'drop-shadow(0 12px 28px rgba(0,0,0,0.18))';
+      });
+      el.addEventListener('mouseleave', () => {
+        item.hovered = false;
+        const tx = item.tx || 0;
+        const ty = item.ty || 0;
+        el.style.transition = 'transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.45s, filter 0.45s';
+        el.style.transform = `translate(${tx}px, ${ty}px) rotate(${item.angle}deg) scale(1)`;
+        el.style.zIndex = '';
+        el.style.filter = '';
+      });
+    });
+  </script>
+
+</body>
+</html>

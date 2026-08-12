@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikki Journal — Martina Gama</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23FBFBFB%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Snell%20Roundhand%2C%20Bradley%20Hand%2C%20cursive%2C%20serif%27%20font-size%3D%2728%27%20font-weight%3D%27700%27%20fill%3D%27%231a1a2e%27%20text-anchor%3D%27middle%27%3EMG%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b6b7b;
+      --navy: #1a1a5e;
+      --navy-mid: #2d2d7a;
+      --border: rgba(0,0,0,0.09);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 5vw;
+      background: rgba(251,251,251,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: var(--font-hand);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--navy); }
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      background: var(--bg-white);
+      border-radius: 20px;
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+
+    .project-hero {
+      padding: 9rem 5vw 5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .project-type {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .project-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      max-width: 900px;
+    }
+    .project-intro-text {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: none;
+      margin-bottom: 2.5rem;
+    }
+    .project-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 3rem;
+      justify-content: start;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .meta-key {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .meta-val {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .meta-val.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mtag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.07);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    .project-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e8e6e0 0%, #d4d0c8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 24px;
+      color: var(--muted);
+      overflow: hidden;
+      margin-top: 86px;
+    }
+
+    .sec {
+      padding: 0 5vw;
+      margin-top: 86px;
+    }
+    .sec-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .sec-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 6px;
+      position: sticky;
+      top: 5rem;
+    }
+    .sec-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .sec-content p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
+    .sec-content p:last-child { margin-bottom: 0; }
+
+    /* Result — single image left, text frame right, aligned */
+    .result-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .result-layout.rev {
+      grid-template-columns: 1fr 1.3fr;
+    }
+    .result-layout.rev .result-images { order: 2; }
+    .result-layout.rev .result-text { order: 1; }
+    .result-images {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 14px;
+      display: block;
+      object-fit: cover;
+    }
+    .result-layout .result-images {
+      aspect-ratio: 4/3;
+    }
+    .result-images.natural {
+      aspect-ratio: auto;
+    }
+    .result-images.zoom-tight {
+      aspect-ratio: 3/4;
+      object-position: center center;
+    }
+    .result-video {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+      background: #000;
+    }
+    .result-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .result-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .result-text p:last-child { margin-bottom: 0; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .feature-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(26,26,94,0.07); }
+    .feature-num { font-family: var(--font-hand); font-size: 26px; color: var(--navy); opacity: 0.18; margin-bottom: 0.75rem; }
+    .feature-card h3 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; max-width: none; }
+
+    .process-steps { display: flex; flex-direction: column; gap: 0; margin-top: 0.5rem; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .process-step:first-child { border-top: 0.5px solid var(--border); }
+    .step-num { font-family: var(--font-hand); font-size: 20px; color: var(--navy); opacity: 0.25; padding-top: 2px; }
+    .step-body h3 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .step-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; max-width: none; }
+    .step-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .steptag { font-size: 10px; padding: 3px 10px; border-radius: 20px; background: rgba(26,26,94,0.06); color: var(--navy-mid); font-weight: 500; }
+
+    /* Other projects */
+    .other-projects {
+      padding: 0 5vw 6rem;
+      margin-top: 86px;
+    }
+    .other-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2.5rem;
+    }
+    .other-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .other-header a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .other-header a:hover { color: var(--navy); }
+    .other-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .other-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .other-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(26,26,94,0.09); }
+    .other-card-bg {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .other-card:hover .other-card-bg { transform: scale(1.05); }
+    .other-card-info {
+      padding: 1.5rem;
+    }
+    .other-card-type {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .other-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .other-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    footer {
+      padding: 2rem 5vw 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid var(--border);
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--navy); }
+
+    @media (max-width: 768px) {
+      .sec-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .result-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .sec-label { position: static; }
+      .project-meta-grid { grid-template-columns: repeat(2, auto); gap: 2rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .other-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .project-meta-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="portfolio.html" class="nav-logo">MG</a>
+    <a href="portfolio.html#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- PROJECT HERO -->
+  <header class="project-hero">
+    <p class="project-type">/ iOS App · Product Design · 3D Experience</p>
+    <h1>Nikki Journal</h1>
+    <p class="project-intro-text">A mobile and Vision Pro journaling app that transforms memories into collectible origami inside an interactive 3D world inspired by Japanese landscapes. Users create expressive journal pages with text, photos, music, drawings, and stickers, blending emotional design with spatial experiences.</p>
+    <div class="project-meta-grid">
+      <div class="meta-item">
+        <span class="meta-key">Year</span>
+        <span class="meta-val">2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Role</span>
+        <span class="meta-val">Product Designer</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Platform</span>
+        <span class="meta-val">iOS · visionOS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- COVER VIDEO -->
+  <div class="project-cover-placeholder">
+    <video src="videonikki.mp4" controls playsinline muted loop poster="videonikkiposter.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+  </div>
+
+  <!-- CHALLENGE -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Challenge</p>
+      <div class="sec-content">
+        <h2>What problem was solving?</h2>
+        <p>Traditional journaling apps focus on text-based entries or simple photo albums, leaving little room for emotional depth or creative expression. Many people struggle to capture the nuance of their feelings, intentions, and memories in a format that feels truly personal, meaningful, and alive.</p>
+        <p>The way we document our experiences often fails to reflect how those experiences actually felt. A list of events or a gallery of photos rarely conveys the mood, the intention, or the emotional weight behind a moment.</p>
+        <p>The opportunity was to reimagine journaling as an immersive, creative act — one that reflects not just what happened, but how it felt, and turns everyday memories into something worth preserving and revisiting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Solution</p>
+      <div class="sec-content">
+        <h2>How solved it?</h2>
+        <p>I designed Nikki Journal, a mobile and Vision Pro app that combines emotional journaling with an interactive 3D world inspired by Japanese aesthetics — gardens, lakes, and traditional temples.</p>
+        <p>Users create personalized scrap pages using text, photos, music, drawings, and stickers, building compositions that reflect meaningful moments and emotions. When a journal is complete, it transforms into a collectible origami figure that appears inside the virtual environment, creating a landscape that grows and evolves alongside the memories being preserved.</p>
+        <p>The project also explored Apple's spatial computing ecosystem, using Reality Composer and native Apple technologies to develop immersive environments, animations, and interactions — bridging emotional design with digital spatial experiences.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVER IMAGE -->
+  <section class="sec">
+    <img class="result-images" src="covernikkiportfolio.png" alt="Nikki Journal cover" />
+  </section>
+
+  <!-- RESULT 3 -->
+  <section class="sec">
+    <div class="result-layout">
+      <img class="result-images" src="image4nikki-v2.png" alt="Nikki Journal onboarding and origami interactions" />
+      <div class="result-text">
+        <h2>Immersive environment </h2>
+        <p>Created in Reality Composer and designed to convey tranquility, making the experience of creating entries more comfortable and welcoming..</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT 4 -->
+  <section class="sec">
+    <div class="result-layout rev">
+      <img class="result-images" src="image5nikki-v2.png" alt="Nikki Journal scrapbook creation with stamps and stickers" />
+      <div class="result-text">
+        <h2>Title</h2>
+        <p>Short description goes here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION PRO EXPERIENCE -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Vision Pro Experience</p>
+      <div class="sec-content">
+        <h2>Designing for spatial computing</h2>
+        <p>After completing the mobile version, the app was extended to Vision Pro, unlocking spatial interactions and a richer, more immersive user experience. This evolution was grounded in extensive research into the device's capabilities and interaction patterns, shaping a design that feels truly sensory and native to the platform.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT 2 -->
+  <section class="sec">
+    <img class="result-images" src="image3nikki.png" alt="Nikki Journal usability testing" />
+  </section>
+
+  <!-- OTHER PROJECTS -->
+  <section class="other-projects">
+    <div class="other-header">
+      <h2>Other projects</h2>
+      <a href="portfolio.html#projects">View all →</a>
+    </div>
+    <div class="other-grid">
+
+      <a class="other-card" href="project.html">
+        <div class="other-card-bg" style="background-image:url('coveravoportfolio.png')"></div>
+        <div class="other-card-info">
+          <span class="other-card-type">Health App</span>
+          <h3 class="other-card-title">Avo Tracker</h3>
+          <p class="other-card-desc">Meal and symptom tracking to identify food triggers and support medical follow-up.</p>
+        </div>
+      </a>
+
+      <a class="other-card" href="elasnomei.html">
+        <div class="other-card-bg" style="background-image:url('coverelasnomeiportfolio.png')"></div>
+        <div class="other-card-info">
+          <span class="other-card-type">Educational App</span>
+          <h3 class="other-card-title">Elas no MEI</h3>
+          <p class="other-card-desc">Making MEI formalization accessible and approachable for women through inclusive design.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Martina Gama — 2026</p>
+  </footer>
+
+</body>
+</html>

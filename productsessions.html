@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Sessions — Martina Gama</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23FBFBFB%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Snell%20Roundhand%2C%20Bradley%20Hand%2C%20cursive%2C%20serif%27%20font-size%3D%2728%27%20font-weight%3D%27700%27%20fill%3D%27%231a1a2e%27%20text-anchor%3D%27middle%27%3EMG%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b6b7b;
+      --navy: #1a1a5e;
+      --navy-mid: #2d2d7a;
+      --border: rgba(0,0,0,0.09);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 5vw;
+      background: rgba(251,251,251,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: var(--font-hand);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      background: var(--bg-white);
+      border-radius: 20px;
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+
+    /* ── HERO PROJECT ── */
+    .project-hero {
+      padding: 9rem 5vw 5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .project-type {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .project-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      max-width: 900px;
+    }
+    .project-intro-text {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: none;
+      margin-bottom: 2.5rem;
+    }
+    .project-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 3rem;
+      justify-content: start;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .meta-item {}
+    .meta-key {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .meta-val {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .meta-val.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mtag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.07);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 12px 24px;
+      border: 1px solid rgba(26,26,94,0.22);
+      border-radius: 40px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .demo-link:hover { transform: translateY(-2px); background: var(--navy); color: #fff; }
+
+    /* ── COVER IMAGE ── */
+    .project-cover {
+      width: 100%;
+      aspect-ratio: 16/8;
+      object-fit: cover;
+      display: block;
+      background: #e0ddd6;
+    }
+    .project-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 16/8;
+      background: linear-gradient(135deg, #e8e6e0 0%, #d4d0c8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 24px;
+      color: var(--muted);
+      margin-top: 86px;
+    }
+
+    /* ── SECTIONS ── */
+    .sec {
+      padding: 0 5vw;
+      margin-top: 86px;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .sec-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .sec-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 6px;
+      position: sticky;
+      top: 5rem;
+    }
+    .sec-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .sec-content p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
+    .sec-content p:last-child { margin-bottom: 0; }
+
+    /* Key Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .feature-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(26,26,94,0.07);
+    }
+    .feature-num {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      color: var(--navy);
+      opacity: 0.18;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+      max-width: none;
+    }
+
+    /* Product Process */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 0.5rem;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .process-step:first-child { border-top: 0.5px solid var(--border); }
+    .step-num {
+      font-family: var(--font-hand);
+      font-size: 20px;
+      color: var(--navy);
+      opacity: 0.25;
+      padding-top: 2px;
+    }
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .step-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+      max-width: none;
+    }
+    .step-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .steptag {
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.06);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    /* Result — single image left, text frame right, aligned */
+    .result-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .result-images {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+      object-fit: cover;
+    }
+    .result-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .result-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .result-text p:last-child { margin-bottom: 0; }
+
+    /* ── OTHER PROJECTS ── */
+    .other-projects {
+      padding: 0 5vw 6rem;
+      margin-top: 86px;
+    }
+    .other-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2.5rem;
+    }
+    .other-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .other-header a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .other-header a:hover { color: var(--navy); }
+    .other-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .other-card {
+      background: var(--bg-white);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      display: block;
+    }
+    .other-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(26,26,94,0.09);
+    }
+    .other-card-cover {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+    }
+    .other-card-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e8e6e0, #d4d0c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 18px;
+      color: var(--muted);
+      overflow: hidden;
+    }
+    .other-card-cover-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+    .other-card-body {
+      padding: 1.5rem;
+    }
+    .other-card-meta {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .other-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .other-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .other-card-tags, .other-tags { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+    .otag {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: rgba(26,26,94,0.06);
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 5vw 3rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 11px; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--navy); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .project-meta-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .sec-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .sec-label { position: static; }
+      .features-grid { grid-template-columns: 1fr; }
+      .result-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .other-grid { grid-template-columns: 1fr; }
+      nav .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">MG</a>
+    <a href="portfolio.html#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- PROJECT HERO -->
+  <header class="project-hero">
+    <p class="project-type">/ macOS App · Product Design · AI</p>
+    <h1>Product Sessions</h1>
+    <p class="project-intro-text">An AI-powered tool for analyzing usability test recordings. It automatically transcribes sessions, identifies patterns in user behavior, and generates structured UX reports with evidence-backed findings — all processed locally on the Mac for privacy.</p>
+    <div class="project-meta-grid">
+      <div class="meta-item">
+        <span class="meta-key">Year</span>
+        <span class="meta-val">2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Role</span>
+        <span class="meta-val">Designer & Developer</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Platform</span>
+        <span class="meta-val">macOS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- COVER -->
+  <div class="project-cover-placeholder">
+    <img src="coverproductsessions.png" alt="Product Sessions cover" style="width:100%;height:100%;object-fit:cover;display:block;" />
+  </div>
+
+  <!-- CHALLENGE -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Challenge</p>
+      <div class="sec-content">
+        <h2>What problem was solving?</h2>
+        <p>Analyzing usability testing sessions is a slow, manual process. Researchers and designers often need to rewatch hours of recordings, take notes by hand, and cross-reference user reactions just to synthesize meaningful insights.</p>
+        <p>This manual workflow delays decision-making and makes it hard to consistently extract evidence-backed findings, especially under tight product timelines. It also raises a privacy concern: usability recordings are sensitive, and most analysis tools require uploading them to external servers.</p>
+        <p>The opportunity was to build a tool that automates the tedious parts of usability analysis while keeping all user data private and on-device.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Solution</p>
+      <div class="sec-content">
+        <h2>How solved it?</h2>
+        <p>I designed and built Product Sessions, a macOS app that uses on-device AI to transcribe and analyze usability test recordings automatically.</p>
+        <p>The app breaks each session down task-by-task, flags emotional moments like frustration, hesitation, and satisfaction, and surfaces time-stamped quotes as evidence — turning raw recordings into structured, shareable UX reports in minutes instead of hours.</p>
+        <p>Because all processing happens locally on the Mac, sensitive user research data never leaves the researcher's device.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURES -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Key Features</p>
+      <div class="sec-content">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-num">01</div>
+            <h3>Automatic Transcription</h3>
+            <p>On-device speech recognition transcribes full usability sessions with no manual work required.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">02</div>
+            <h3>Task-by-Task Analysis</h3>
+            <p>AI breaks each session down by task, validating completion and surfacing the key moments.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">03</div>
+            <h3>Emotional Moment Detection</h3>
+            <p>Automatically flags frustration, hesitation, and satisfaction throughout a recording.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">04</div>
+            <h3>Evidence-Backed Quotes</h3>
+            <p>Time-stamped quotes are pulled directly from the recording to support every finding.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">05</div>
+            <h3>Executive Summaries</h3>
+            <p>Generates structured reports with success metrics and key concerns for stakeholders.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">06</div>
+            <h3>Jira Integration</h3>
+            <p>Findings and action items connect directly into existing product workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT PROCESS -->
+  <section class="sec">
+    <div class="sec-inner">
+      <p class="sec-label">/ Product Process</p>
+      <div class="sec-content">
+        <div class="process-steps">
+
+          <div class="process-step">
+            <span class="step-num">01</span>
+            <div class="step-body">
+              <h3>Research & Discovery</h3>
+              <p>Mapped the manual usability-analysis workflow researchers rely on today, identifying where the most time and context get lost.</p>
+              <div class="step-tags">
+                <span class="steptag">User Interviews</span>
+                <span class="steptag">Jobs to be Done</span>
+                <span class="steptag">Benchmark</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <span class="step-num">02</span>
+            <div class="step-body">
+              <h3>Define & Ideate</h3>
+              <p>Defined the core workflow — record, transcribe, analyze, report — and how on-device AI could remove manual steps without compromising privacy.</p>
+              <div class="step-tags">
+                <span class="steptag">User Journey</span>
+                <span class="steptag">How Might We</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <span class="step-num">03</span>
+            <div class="step-body">
+              <h3>Design & Prototype</h3>
+              <p>Designed the report structure and session breakdown views, prototyping in Figma before moving into build.</p>
+              <div class="step-tags">
+                <span class="steptag">Wireframes</span>
+                <span class="steptag">Design System</span>
+                <span class="steptag">Figma</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <span class="step-num">04</span>
+            <div class="step-body">
+              <h3>Build & Test</h3>
+              <p>Built the native macOS app, integrating on-device transcription and AI analysis, and tested accuracy against real usability sessions.</p>
+              <div class="step-tags">
+                <span class="steptag">Swift</span>
+                <span class="steptag">SwiftUI</span>
+                <span class="steptag">On-device AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <span class="step-num">05</span>
+            <div class="step-body">
+              <h3>Launch</h3>
+              <p>Shipped Product Sessions to the Mac App Store.</p>
+              <div class="step-tags">
+                <span class="steptag">App Store</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="sec">
+    <div class="result-layout">
+      <img class="result-images" src="iconproductsession.svg" alt="Product Sessions icon" style="background:#faf8f3; padding:3rem;" />
+      <div class="result-text">
+        <h2>Results</h2>
+        <p>Short description of the outcome and impact goes here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER PROJECTS -->
+  <section class="other-projects">
+    <div class="other-header">
+      <h2>Other projects</h2>
+      <a href="portfolio.html#projects">View all →</a>
+    </div>
+    <div class="other-grid">
+
+      <a class="other-card" href="project.html">
+        <div class="other-card-cover-placeholder">
+          <img src="coveravoportfolio.png" alt="Avo Tracker" />
+        </div>
+        <div class="other-card-body">
+          <p class="other-card-meta">iOS App · 2025</p>
+          <h3 class="other-card-title">Avo Tracker</h3>
+          <p class="other-card-desc">A health tracking app that connects meal records with symptom data to help users identify food triggers.</p>
+          <div class="other-tags">
+            <span class="otag">Swift</span>
+            <span class="otag">Product Design</span>
+            <span class="otag">App Store</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="other-card" href="nikki.html">
+        <div class="other-card-cover-placeholder">
+          <img src="covernikkiportfolio.png" alt="Nikki Journal" />
+        </div>
+        <div class="other-card-body">
+          <p class="other-card-meta">iOS App · 3D Experience · 2026</p>
+          <h3 class="other-card-title">Nikki Journal</h3>
+          <p class="other-card-desc">An immersive journaling app inspired by Japanese aesthetics, where journals become collectible 3D origami.</p>
+          <div class="other-tags">
+            <span class="otag">Swift</span>
+            <span class="otag">Reality Composer</span>
+            <span class="otag">Product Design</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Martina Gama — 2026</p>
+  </footer>
+
+</body>
+</html>
