@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using AI in the Design Process — Martina Gama</title>
+  <title>Exploring AI in End-to-End Product Development — Martina Gama</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23FBFBFB%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Snell%20Roundhand%2C%20Bradley%20Hand%2C%20cursive%2C%20serif%27%20font-size%3D%2728%27%20font-weight%3D%27700%27%20fill%3D%27%231a1a2e%27%20text-anchor%3D%27middle%27%3EMG%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -112,12 +112,12 @@
       margin-bottom: 1.75rem;
     }
     .article-body h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 3vw, 32px);
-      font-weight: 400;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+      font-size: clamp(22px, 2.6vw, 28px);
+      font-weight: 500;
       color: var(--navy);
       line-height: 1.3;
-      margin: 3rem 0 1.25rem;
+      margin: 4.5rem 0 1.25rem;
     }
     .article-body blockquote {
       border-left: 3px solid var(--navy);
@@ -139,6 +139,9 @@
       align-items: center;
     }
     footer p { font-size: 11px; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--navy); }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -160,8 +163,8 @@
   <!-- ARTICLE -->
   <div class="article-wrap">
     <p class="article-tag">Process</p>
-    <h1 class="article-title">Using AI in the Design Process</h1>
-    <p class="article-subtitle">How generative tools have started showing up in my day-to-day work — and where I still draw the line.</p>
+    <h1 class="article-title">Exploring AI in End-to-End Product Development</h1>
+    <p class="article-subtitle">Bringing AI into my product workflow.</p>
   </div>
 
   <div class="article-cover-placeholder">
@@ -172,23 +175,49 @@
     <div class="article-body">
       <p>Over the past year, AI tools quietly moved from something I opened out of curiosity to something I open every day. Not because I decided to "adopt AI" as a strategy, but because a few tools kept saving me time on the parts of the process that used to eat the most hours — and I kept coming back.</p>
 
-      <h2>Research and synthesis</h2>
-      <p>Interview transcripts pile up fast, and reading through every one of them line by line is where a lot of research time disappears. I now use AI to get a first pass — summarizing sessions, flagging repeated phrases, grouping quotes into rough themes — before I sit down and build the affinity map myself. It's a first draft of a first draft, never the final read. The clustering it suggests is often close, but "close" is exactly where a human still needs to double-check.</p>
+      <h2>Starting Point</h2>
+      <p>My curiosity was simple: what happens when AI stops being a point-in-time tool and becomes part of the entire product creation process?
+I wanted to experiment with this in practice — from discovery to code, including ideation, feature definition, and interface decisions. To do that, I needed a real project. I created a macOS app for designers, developers, and PMs who need a more practical and organized way to analyze usability tests — a problem that is part of my own day-to-day work and one I know firsthand.</p>
 
-      <h2>Exploring the space faster</h2>
-      <p>Before committing to Figma, I've started using AI to generate quick moodboards and divergent layout ideas — a way to see five directions in the time it used to take to sketch one. It doesn't replace sketching, but it changes what sketching is for: instead of generating options, I use it to react to options and decide which one is actually worth building.</p>
+      <p>Before I started building, I mapped out which agents could be part of the process, how to set up custom skills, and how to orchestrate different tools for each stage of the work. This first step was essential: before learning how to use AI tools, I needed to understand how to structure a workflow in which they could actually collaborate with me.</p>
+
+      <p>I decided to take it one step further and make AI part of the app itself. That’s when I discovered Apple Foundation Models, and the technology fit naturally into the context of the product.
+The app works with recordings and transcripts from real user testing sessions. In this context, privacy and data security weren’t details — they were product requirements. Having a model capable of running locally, without relying on sending this information to external servers, made this approach particularly compelling.
+Beyond that, the ability to generate comparative analyses directly within the app opened up a new dimension for the product: cross-referencing different interview sessions to identify patterns, differences, and insights without having to leave the tool.
+Only after understanding this bigger picture did I actually start building.</p>
+
+      <h2>Discovery — where AI delivered the most value</h2>
+      <p>Discovery was, without a doubt, where I saw the biggest gain.
+The Nielsen Norman Group identifies four roles AI can play in UX: content editor, research assistant, ideation partner, and design assistant. My experience strongly reflected the research role. I used agents to map the landscape, find references, connect user behavior patterns, and generate initial hypotheses.
+What would normally take days became hours, as AI removed much of the friction around getting started.
+That shift gave me more time for the part of discovery that actually requires me: interpreting information, challenging assumptions, and defining the right problem. 
+</p>
 
       <blockquote>AI is fastest at giving me more options. It is still terrible at telling me which one is right.</blockquote>
 
-      <h2>Where I still say no</h2>
-      <p>Final copy, the specific feel of a transition, the judgment call on whether an interaction is actually delightful or just technically correct — that stays with me. AI drafts are a starting point, never the shipped version. The moment a decision is about taste or trust, I've learned to slow back down.</p>
+      <h2>Ideation & Interface — speed with a cost</h2>
+      <p>Ideation was where the process became faster — and more chaotic.
+I used Figma Make, Claude Design, and Claude Code to explore and build the first versions of the interface. Going from nothing to functional screens was significantly faster than my usual process. But that speed came with a trade-off.
+Each tool had its own logic and output, which meant constantly curating the results to maintain visual and interaction consistency. After several iterations, I realized something important: I still preferred designing directly in Figma.
+For complex problems, the control and precision of making each decision myself are hard to replace. AI was great at generating directions and accelerating the starting point, but hierarchy, edge cases, states, and system consistency still required human judgment.</p>
 
-      <p>I don't think the goal is to use AI in every step of the process. It's to notice which steps were never really about your judgment in the first place, and let those go a little faster — so there's more time left for the ones that were.</p>
-    </div>
+      <h2>Code — where I most complemented my design practice</h2>
+      <p>Once the design was defined, moving into code was much smoother.
+Working with Swift and SwiftUI, I used AI as an execution partner: accelerating repetitive tasks, suggesting implementations for familiar patterns, and helping me iterate quickly on specific components.
+The biggest lesson was simple: AI worked best when the design decisions had already been made.
+When I gave it a clear interface to implement, it was genuinely useful. When I tried to use code to figure out unresolved design decisions, the process became messy again.</p>
+
+      <blockquote>What changed in my process wasn't how much I worked, but what I focused on. I spent less time on execution and more on product decisions — and that is where AI actually adds value.
+And ultimately, AI doesn't reduce the role of the designer — it increases the importance of judgment.</blockquote>
+
   </div>
 
   <footer>
     <p>Martina Gama — 2026</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/martina-nogueira-da-gama-adegas/" target="_blank">LinkedIn</a>
+      <a href="index.html">Back to home</a>
+    </div>
   </footer>
 
 </body>
