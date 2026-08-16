@@ -72,8 +72,8 @@
     .result-images { width: 100%; aspect-ratio: 16/9; border-radius: 14px; display: block; object-fit: cover; }
     .result-layout .result-images { aspect-ratio: 4/5; }
     .result-layout .result-images.wide { aspect-ratio: 4/3; }
-    .result-video-wrap { width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: #000; }
-    .result-video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.05) translate(2%, 3%); }
+    .result-video-wrap { width: 100%; max-width: 320px; margin: 8px auto 0; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden; background: #000; }
+    .result-video-wrap video { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; display: block; }
     .result-text h2 { font-family: var(--font-serif); font-size: clamp(24px, 3vw, 38px); font-weight: 400; color: var(--navy); line-height: 1.2; margin-bottom: 1.5rem; }
     .result-text p { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
     .result-text p:last-child { margin-bottom: 0; }
@@ -310,10 +310,12 @@
   <!-- SCREENS 1 -->
   <section class="sec">
     <div class="result-layout">
-      <img class="result-images wide" src="elasmei2.png" alt="Elas no MEI screens" />
+      <img class="result-images wide" src="elasmei3.png" alt="Elas no MEI screens" />
       <div class="result-text">
-        <h2>Never miss a deadline again</h2>
-        <p>Each user can set up personalized reminders for the DAS payment and the annual DASN declaration — choosing the frequency and date that fits her routine. A simple safeguard that helps avoid late fees and keeps her MEI status in good standing, without having to memorize every deadline.</p>
+        <h2>Educational Content</h2>
+        <p>A personalized home screen welcomes each user into her own journey, surfacing guides, benefits, and next steps at a glance. Educational content is broken into short, plain-language reads and clear benefit breakdowns such as retirement eligibility — so understanding your rights never feels like homework.
+
+</p>
       </div>
     </div>
   </section>
@@ -321,12 +323,10 @@
   <!-- SCREENS 2 -->
   <section class="sec">
     <div class="result-layout rev">
-      <img class="result-images wide" src="elasmei3.png" alt="Elas no MEI screens" />
+      <img class="result-images wide" src="elasmei2.png" alt="Elas no MEI screens" />
       <div class="result-text">
-        <h2>Educational Content</h2>
-        <p>A personalized home screen welcomes each user into her own journey, surfacing guides, benefits, and next steps at a glance. Educational content is broken into short, plain-language reads and clear benefit breakdowns such as retirement eligibility — so understanding your rights never feels like homework.
-
-</p>
+        <h2>Never miss a deadline again</h2>
+        <p>Each user can set up personalized reminders for the DAS payment and the annual DASN declaration — choosing the frequency and date that fits her routine. A simple safeguard that helps avoid late fees and keeps her MEI status in good standing, without having to memorize every deadline.</p>
       </div>
     </div>
   </section>
