@@ -198,6 +198,11 @@
       gap: 3.5rem;
       align-items: center;
     }
+    .result-layout.rev {
+      grid-template-columns: 1fr 1.3fr;
+    }
+    .result-layout.rev .result-images { order: 2; }
+    .result-layout.rev .result-text { order: 1; }
     .result-images {
       width: 100%;
       aspect-ratio: 16/9;
@@ -206,7 +211,7 @@
       object-fit: cover;
     }
     .result-layout .result-images {
-      aspect-ratio: 4/5;
+      aspect-ratio: 4/3;
     }
     .result-text h2 {
       font-family: var(--font-serif);
@@ -401,7 +406,7 @@
       <p class="sec-label">/ Solution</p>
       <div class="sec-content">
         <h2>How solved it?</h2>
-        <p>I designed Profitto, an app that centralizes financial control, inventory management, and pricing in a single intuitive platform built for small entrepreneurs — no spreadsheets, no hassle.</p>
+        <p>The app centralizes financial control, inventory management, and pricing in a single intuitive platform built for small entrepreneurs.</p>
         <p>By registering products and their ingredients, the app automatically calculates the total production cost and links it directly to inventory and guided pricing. Each recorded sale updates the financial dashboard in real time and adjusts stock levels accordingly — with alerts when ingredients are running low to help avoid waste and shortages.</p>
         <p>The result is a connected system that gives entrepreneurs a clear view of their real costs, suggests prices that ensure profit and competitiveness, and puts the full picture of their business in one place.</p>
       </div>
@@ -531,8 +536,30 @@
     <div class="result-layout">
       <img class="result-images" src="image1profitto.png" alt="Profitto screens" />
       <div class="result-text">
-        <h2>Results</h2>
-        <p>Short description of the outcome and impact goes here.</p>
+        <h2>All-in-one dashboard</h2>
+        <p>Profitto brings together everything a small entrepreneur needs to simplify their daily routine and gain more control and practicality. All the most important information about the business is centralized in one place, without complexity — the biggest differentiator is how easy it is to use, with the entire experience designed so anyone can organize their business without dealing with complicated tools.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT 2 -->
+  <section class="sec">
+    <div class="result-layout rev">
+      <img class="result-images" src="image2profitto.png" alt="Profitto pricing screens" />
+      <div class="result-text">
+        <h2>Pricing without the guesswork</h2>
+        <p>A guided pricing flow helps entrepreneurs set the final sale price for each product with confidence. By adjusting the sale value or the profit margin, users see the calculation update in real time — turning one of the hardest parts of running a small business into a simple, guided step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT 3 -->
+  <section class="sec">
+    <div class="result-layout">
+      <img class="result-images" src="image3profitto.png" alt="Profitto product and sales screens" />
+      <div class="result-text">
+        <h2>Products and sales, organized</h2>
+        <p>Each product is registered with its sale value, category, yield, and the ingredients needed to produce it, giving a clear view of the full offering. Sales are logged just as easily, keeping an organized history that connects directly back to inventory and financial control.</p>
       </div>
     </div>
   </section>
